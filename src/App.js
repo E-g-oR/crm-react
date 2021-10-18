@@ -1,12 +1,12 @@
 import { createTheme, useMediaQuery, ThemeProvider, CssBaseline } from '@mui/material';
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LoginLayout from './layouts/Login_Layout';
-import Account from './layouts/mainlayout/Account';
-import Categories from './layouts/mainlayout/Categories';
+import LoginLayout from './layouts/LoginLayout';
+import Account from './views/Account/Account';
+import Categories from './views/Categories/Categories';
 import MainLayout from './layouts/mainlayout/MainLayout';
-import NewRecord from './layouts/mainlayout/NewRecord';
-import Planning from './layouts/mainlayout/Planning';
+import NewRecord from './views/NewRecord/NewRecord';
+import Planning from './views/Planning/Planning';
 
 const App = () => {
 

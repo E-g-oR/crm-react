@@ -31,7 +31,7 @@ const Account = () => {
 			<Typography component="h1" variant="h3">Account</Typography>
 
 			<Stack
-				direction={{ xs: 'column', sm: 'row' }}
+				direction={{ sm: 'column', sm: 'row' }}
 				spacing={{ xs: 1, sm: 2, md: 4 }}
 			>
 				<Paper
@@ -55,26 +55,31 @@ const Account = () => {
 						<Typography variant='h4'>Курсы валют</Typography>
 						<Paper variant="outlined">
 							<table>
-								<tr>
-									<th>Валюта</th>
-									<th>Курс</th>
-									<th>Дата</th>
-								</tr>
-								<tr>
-									<td>USD</td>
-									<td>2.635</td>
-									<td>17.10.2021</td>
-								</tr>
-								<tr>
-									<td>EUR</td>
-									<td>3.123</td>
-									<td>17.10.2021</td>
-								</tr>
-								<tr>
-									<td>GBP</td>
-									<td>3.658</td>
-									<td>17.10.2021</td>
-								</tr>
+								<thead>
+									<tr>
+										<th>Валюта</th>
+										<th>Курс</th>
+										<th>Дата</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>USD</td>
+										<td>2.635</td>
+										<td>17.10.2021</td>
+									</tr>
+									<tr>
+										<td>EUR</td>
+										<td>3.123</td>
+										<td>17.10.2021</td>
+									</tr>
+									<tr>
+										<td>GBP</td>
+										<td>3.658</td>
+										<td>17.10.2021</td>
+									</tr>
+								</tbody>
+
 							</table>
 						</Paper>
 					</Box>
