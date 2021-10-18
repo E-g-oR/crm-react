@@ -1,0 +1,10 @@
+.login-background {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-image: url("https://images.unsplash.com/photo-1634502795504-f0f685b62d8e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1332&q=80");
+	background-position: center;
+	background-size: cover;
+}
