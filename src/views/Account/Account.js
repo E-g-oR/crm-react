@@ -28,10 +28,10 @@ const columns = [
 const Account = () => {
 	return (
 		<>
-			<Typography component="h1" variant="h3">Account</Typography>
-
+			<Typography component="h1" variant="h4">Счет</Typography>
+			<br />
 			<Stack
-				direction={{ sm: 'column', sm: 'row' }}
+				direction={{ xs: 'column', sm: 'column', md: 'row' }}
 				spacing={{ xs: 1, sm: 2, md: 4 }}
 			>
 				<Paper
@@ -41,18 +41,18 @@ const Account = () => {
 						flex: 2
 					}}>
 					<Box sx={BoxInsidePaper}>
-						<Typography component="h2" variant="h4">Счет</Typography>
+						<Typography component="h2" variant="h5">Счет</Typography>
 						<Typography variant="h6">12 430.70 р.</Typography>
-						<br />
-						<br />
-						<Typography component="h2" variant="h4">Сбережения</Typography>
+					</Box>
+					<Box sx={BoxInsidePaper}>
+						<Typography component="h2" variant="h5">Сбережения</Typography>
 						<Typography variant="h6">12 430.70 р.</Typography>
 					</Box>
 				</Paper>
 
 				<Paper variant="outlined" sx={{ backgroundColor: "secondary.main", flex: 4 }}>
 					<Box sx={BoxInsidePaper}>
-						<Typography variant='h4'>Курсы валют</Typography>
+						<Typography variant='h5'>Курсы валют</Typography>
 						<Paper variant="outlined">
 							<table>
 								<thead>

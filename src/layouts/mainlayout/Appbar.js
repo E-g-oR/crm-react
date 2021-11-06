@@ -3,6 +3,7 @@ import { Menu as MenuIcon, AccountCircleRounded } from "@mui/icons-material";
 import { AppBar, IconButton, Toolbar, Typography, Menu, MenuItem } from "@mui/material";
 import { styled } from '@mui/material/styles'
 import { drawerWidth } from "./MainLayout";
+import { useHistory } from "react-router";
 
 
 
@@ -25,7 +26,7 @@ const Topbar = styled(AppBar, {
 
 const Appbar = ({ handleDrawerOpen, open }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const history = useHistory()
 
 
   const handleMenu = (event) => {
@@ -78,8 +79,16 @@ const Appbar = ({ handleDrawerOpen, open }) => {
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>Log out</MenuItem>
+          <MenuItem onClick={() => {
+            handleClose()
+            history.push('/profile')
+          }}
+          >Профиль</MenuItem>
+          <MenuItem onClick={() => {
+            handleClose()
+            history.push('/login')
+          }}
+          >Выйти</MenuItem>
         </Menu>
       </Toolbar>
     </Topbar>

@@ -5,7 +5,9 @@ import { Box } from "@mui/system";
 const History = () => {
 	return (
 		<>
-			<Typography component="h1" variant="h3">History</Typography>
+			<Typography component="h1" variant="h4">История</Typography>
+			<br />
+
 			<Box>
 				<Paper variant="outlined">
 					<table>
