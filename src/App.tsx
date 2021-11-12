@@ -2,11 +2,7 @@ import { createTheme, useMediaQuery, ThemeProvider, CssBaseline } from '@mui/mat
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LoginLayout from './layouts/LoginLayout';
-import Account from './views/Account/Account';
-import Categories from './views/Categories/Categories';
 import MainLayout from './layouts/mainlayout/MainLayout';
-import NewRecord from './views/NewRecord/NewRecord';
-import Planning from './views/Planning/Planning';
 
 const App = () => {
 

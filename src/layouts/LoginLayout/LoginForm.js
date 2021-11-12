@@ -1,6 +1,18 @@
 import React from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FilledInput, FormControl, IconButton, Input, InputAdornment, InputLabel, Paper, TextField, Typography } from "@mui/material";
+import {
+	Button,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	FormControl,
+	IconButton,
+	Input,
+	InputAdornment,
+	InputLabel,
+	TextField,
+	Typography
+} from "@mui/material";
 import { Box } from "@mui/system";
 import { useHistory } from "react-router";
 

@@ -1,16 +1,16 @@
 import React from "react";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Divider, Paper, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import CustomTable from "../components/UI/Table";
 import './account.css'
-const BoxInsidePaper = {
-	color: "#fff",
-	padding: "1rem 2rem",
-	display: "flex",
-	flexDirection: "column",
-	// alignItems: "center",
-	// justifyContent: "center"
-}
 
+const tableHead = ['Валюта', 'Курс', 'Дата'];
+const tableRows = [
+	{ name: 'USD', rate: 2.4428, margin: "MORE", date: '12.12.2021' },
+	{ name: 'EUR', rate: 2.8012, margin: "LESS", date: '12.12.2021' },
+	{ name: 'RUB', rate: 3.4332, margin: "LESS", date: '12.12.2021' },
+	{ name: 'GBP', rate: 3.2718, margin: "LESS", date: '12.12.2021' },
+];
 
 const rows = [
 	{ id: 1, col1: 'Hello', col2: 'World', col3: '12.12.2021' },
@@ -40,18 +40,33 @@ const Account = () => {
 						backgroundColor: "primary.main",
 						flex: 2
 					}}>
-					<Box sx={BoxInsidePaper}>
+					<Box sx={{ // TODO change to className prop
+						color: "#fff",
+						padding: "1rem 2rem",
+						display: "flex",
+						flexDirection: "column",
+					}}>
 						<Typography component="h2" variant="h5">Счет</Typography>
 						<Typography variant="h6">12 430.70 р.</Typography>
 					</Box>
-					<Box sx={BoxInsidePaper}>
+					<Box sx={{ // TODO change to className prop
+						color: "#fff",
+						padding: "1rem 2rem",
+						display: "flex",
+						flexDirection: "column",
+					}}>
 						<Typography component="h2" variant="h5">Сбережения</Typography>
 						<Typography variant="h6">12 430.70 р.</Typography>
 					</Box>
 				</Paper>
 
 				<Paper variant="outlined" sx={{ backgroundColor: "secondary.main", flex: 4 }}>
-					<Box sx={BoxInsidePaper}>
+					<Box sx={{ // TODO change to className prop
+						color: "#fff",
+						padding: "1rem 2rem",
+						display: "flex",
+						flexDirection: "column",
+					}}>
 						<Typography variant='h5'>Курсы валют</Typography>
 						<Paper variant="outlined">
 							<table>
@@ -81,6 +96,10 @@ const Account = () => {
 								</tbody>
 
 							</table>
+						</Paper>
+						<Divider />
+						<Paper>
+							<CustomTable tableHead={['hello']} tableRows={['goodbye']} />
 						</Paper>
 					</Box>
 				</Paper>

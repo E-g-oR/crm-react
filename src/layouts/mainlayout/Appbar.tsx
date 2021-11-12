@@ -1,35 +1,41 @@
 import React from "react";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { Menu as MenuIcon, AccountCircleRounded } from "@mui/icons-material";
-import { AppBar, IconButton, Toolbar, Typography, Menu, MenuItem } from "@mui/material";
+import { IconButton, Toolbar, Typography, Menu, MenuItem } from "@mui/material";
 import { styled } from '@mui/material/styles'
 import { drawerWidth } from "./MainLayout";
 import { useHistory } from "react-router";
 
 
 
-const Topbar = styled(AppBar, {
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
+    marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
 }));
 
-const Appbar = ({ handleDrawerOpen, open }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+
+const Appbar: React.FC<{ handleDrawerOpen: () => void, open: boolean }> = ({ handleDrawerOpen, open }) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const history = useHistory()
 
-
-  const handleMenu = (event) => {
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -38,7 +44,7 @@ const Appbar = ({ handleDrawerOpen, open }) => {
   };
 
   return (
-    <Topbar position="fixed" open={open}>
+    <AppBar position="fixed" open={open}>
       <Toolbar>
         <IconButton
           color="inherit"
@@ -80,19 +86,23 @@ const Appbar = ({ handleDrawerOpen, open }) => {
           onClose={handleClose}
         >
           <MenuItem onClick={() => {
-            handleClose()
-            history.push('/profile')
+            handleClose();
+            history.push('/profile');
           }}
-          >Профиль</MenuItem>
+          >
+            Профиль
+          </MenuItem>
           <MenuItem onClick={() => {
-            handleClose()
-            history.push('/login')
+            handleClose();
+            history.push('/login');
           }}
-          >Выйти</MenuItem>
+          >
+            Выйти
+          </MenuItem>
         </Menu>
       </Toolbar>
-    </Topbar>
+    </AppBar>
   )
 }
 
-export default Appbar
+export default Appbar;

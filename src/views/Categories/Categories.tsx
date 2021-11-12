@@ -1,5 +1,11 @@
 import { SendRounded } from "@mui/icons-material";
-import { Button, FormControl, InputLabel, MenuItem, Paper, Select, Stack, TextField, Typography } from "@mui/material";
+import {
+	Button,
+	Paper,
+	Stack,
+	TextField,
+	Typography
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import './categories.css'

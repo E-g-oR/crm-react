@@ -1,14 +1,15 @@
 import { SendRounded } from "@mui/icons-material";
-import { Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Button, FormControl, InputLabel, MenuItem, Paper, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
 const NewRecord = () => {
 	const [type, setType] = React.useState('');
 
-	const handleChange = (event) => {
+	const handleChange = (event: SelectChangeEvent) => {
 		setType(event.target.value);
 	};
+
 	return (
 		<>
 			<Typography component="h1" variant="h4">Новая запись</Typography>
