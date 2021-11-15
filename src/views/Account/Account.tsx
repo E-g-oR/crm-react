@@ -1,8 +1,9 @@
 import React from "react";
-import { Divider, Paper, Stack, Typography } from "@mui/material";
+import { Chip, Divider, Paper, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomTable, { ITableHead, ITableRow } from "../components/UI/Table";
 import './account.css'
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
 const tableHead: ITableHead = ['Валюта', 'Курс', 'Дата'];
 const tableRows: ITableRow = [
@@ -15,6 +16,24 @@ const tableRows: ITableRow = [
 const TableRowsComponent: React.FC<{ data: ITableRow }> = ({ data}) => {
 	return (
 		<>
+			<TableBody>
+			{data.length && data.map(item => (
+				<TableRow key={item.name + item.rate}>
+					<TableCell>{item.name}</TableCell>
+
+					<TableCell>
+						<Chip
+							label={`${item.rate}`}
+							color={item.margin === "MORE" ? "success" : "error"}
+							variant="outlined"
+							icon={item.margin === "MORE" ? <ArrowDropUp /> : <ArrowDropDown />}
+						/>
+					</TableCell>
+
+					<TableCell>{item.date}</TableCell>
+				</TableRow>
+			))}
+			</TableBody>
 		</>
 	)
 }
@@ -64,7 +83,7 @@ const Account = () => {
 					}}>
 						<Typography variant='h5'>Курсы валют</Typography>
 						<Divider />
-						<Paper>
+						<Paper variant="outlined" >
 							<CustomTable TableRowsComponent={TableRowsComponent} tableRows={tableRows} tableHead={tableHead} />
 						</Paper>
 					</Box>
