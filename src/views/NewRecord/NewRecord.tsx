@@ -16,7 +16,7 @@ const NewRecord = () => {
 			<br />
 
 			<Box sx={{ maxWidth: "500px" }}>
-				<Paper sx={{ padding: "1rem 2rem" }} >
+				<Paper variant="outlined" sx={{ padding: "1rem 2rem" }} >
 					<FormControl variant="filled" fullWidth margin="dense" >
 						<InputLabel id="demo-simple-select-label">Категория</InputLabel>
 						<Select

@@ -7,75 +7,92 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(
+import "./Table.scss"
+
+export type ITableHead = string[]
+
+export interface ITableRowItem {
   name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-) {
-  return { name, calories, fat, carbs, protein };
+  rate: number,
+  margin: "MORE" | "LESS" | "SAME",
+  date: string
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+export type ITableRow = ITableRowItem[];
 
 
-const TableHeader = () => {
+
+const TableHeadCustom: React.FC<{ data: ITableHead }> = ({ data }) => {
+
   return (
     <TableHead>
       <TableRow>
-        <TableCell>Dessert (100g serving)</TableCell>
-        <TableCell align="right">Calories</TableCell>
-        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+        {data.length && data.map(title => (
+          <TableCell key={title}><strong>{title}</strong></TableCell>
+        ))}
       </TableRow>
     </TableHead>
   )
 }
 
-const TableLine = () => {
-  
-}
-interface ITableRow {
-  name: string,
-  rate: number,
-  margin: string,
-  date: string
-}
-interface ITable {
-  tableHead: string[],
-  tableRows: string[],
+const TableRowCustom: React.FC<{ data: any[] }> = ({ data }) => {
+  const properties = [] as string[];
+  const items = [] as any[];
+
+  React.useEffect(() => {
+
+    for (let property in data[0]) {
+      properties.push(property)
+    }
+
+    for (let i = 0; i < data.length; i++) {
+      items[i] = [];
+      properties.forEach((prop: any) => {
+        items[i].push(data[i][prop])
+      })
+    }
+    console.log(items);
+    items.forEach(row => {
+      row.forEach((item: any) => {
+        console.log(item);
+
+      })
+    })
+    return
+  }, [])
+
+  return (
+    <>
+      {items.length && items.map(row => (
+        <TableRow>
+          {row.length && row.map((item: any) => (
+            <TableCell>{item}</TableCell>
+          ))}
+        </TableRow>
+      ))}
+
+    </>
+  )
 }
 
-const CustomTable: React.FC<ITable> = ({tableHead, tableRows}) => {
+interface ITable {
+  tableHead: ITableHead,
+  tableRows: ITableRow,
+  TableRowsComponent: React.FC<{ data: ITableRow}>
+}
+
+const CustomTable: React.FC<ITable> = ({
+  tableHead,
+  tableRows,
+  TableRowsComponent
+}) => {
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        
-        <TableHeader />
-        
+    <TableContainer className="table-container" component={Paper}>
+      <Table className="table" aria-label="simple table">
+        <TableHeadCustom data={tableHead} />
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
+          <TableRowsComponent data={tableRows} />
         </TableBody>
       </Table>
     </TableContainer>

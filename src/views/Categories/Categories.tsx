@@ -19,7 +19,7 @@ const Categories = () => {
 				spacing={{ xs: 1, sm: 2, md: 4 }}
 			>
 				<Box sx={{ maxWidth: "500px" }}>
-					<Paper sx={{ padding: "1rem 2rem" }} >
+					<Paper variant="outlined" sx={{ padding: "1rem 2rem" }} >
 						<Typography variant="h5">Создать</Typography>
 
 						<TextField
@@ -43,7 +43,7 @@ const Categories = () => {
 				</Box>
 
 				<Box sx={{ maxWidth: "500px" }}>
-					<Paper sx={{ padding: "1rem 2rem" }} >
+					<Paper variant="outlined" sx={{ padding: "1rem 2rem" }} >
 						<Typography variant="h5">Редактировать</Typography>
 
 						<TextField
