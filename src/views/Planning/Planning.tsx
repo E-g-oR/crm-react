@@ -1,28 +1,38 @@
 import { LinearProgress, Typography } from "@mui/material";
 import React from "react";
+import PlanningItem from "./PlanningItem";
 
 const Planning = () => {
+	const VALUES = [
+		{
+			title: "Девушка",
+			value: 13970,
+			limit: 45000
+		},
+		{
+			title: "Еда",
+			value: 750,
+			limit: 10000
+		},
+		{
+			title: "Машина",
+			value: 57980,
+			limit: 60000
+		},
+		{
+			title: "Подарки",
+			value: 50980,
+			limit: 60000
+		}
+	]
+
 	return (
 		<>
 			<Typography component="h1" variant="h4">Планирование</Typography>
 			<br />
-			<Typography variant='h5'>Девушка</Typography>
-			<br />
-			<Typography variant='body1'>15 238.23 р. из 40 000 р.</Typography>
-			<br />
-			<LinearProgress variant="determinate" color="success" value={37} />
-			<br />
-			<Typography variant='h5'>Еда</Typography>
-			<br />
-			<Typography variant='body1'> 24 736.55 р. из 30 000 р.</Typography>
-			<br />
-			<LinearProgress variant="determinate" color="warning" value={74} />
-			<br />
-			<Typography variant='h5'>Одежда</Typography>
-			<br />
-			<Typography variant='body1'>35 398.00 р. из 36 000 р.</Typography>
-			<br />
-			<LinearProgress variant="determinate" color="error" value={99} />
+			{VALUES.length && VALUES.map(item => (
+				<PlanningItem key={item.title + item.value} value={item.value} limit={item.limit} title={item.title} />
+			))}
 		</>
 	)
 }

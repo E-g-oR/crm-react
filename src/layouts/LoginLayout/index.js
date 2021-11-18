@@ -7,15 +7,20 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 import './loginLayout.css'
+import store from "../../utils/store";
 
 const LoginLayout = () => {
 
 	return (
 		<div className="login-background">
-			<Dialog open={true}  >
+			<Dialog open={true} >
 				<Switch>
-					<Route path="/login" component={LoginForm} />
-					<Route path="/register" component={RegisterForm} />
+					<Route path="/login" >
+						<LoginForm store={store} />
+					</Route>
+					<Route path="/register"  >
+						<RegisterForm store={store} />
+					</Route>
 				</Switch>
 			</Dialog>
 		</div>

@@ -5,6 +5,8 @@ import { IconButton, Toolbar, Typography, Menu, MenuItem } from "@mui/material";
 import { styled } from '@mui/material/styles'
 import { drawerWidth } from "./MainLayout";
 import { useHistory } from "react-router";
+import store from "../../utils/store";
+import { getAuth } from "@firebase/auth";
 
 
 
@@ -42,6 +44,11 @@ const Appbar: React.FC<{ handleDrawerOpen: () => void, open: boolean }> = ({ han
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const logout = () => {
+    const auth = getAuth();
+    store.authStore.logout(auth);
+  }
 
   return (
     <AppBar position="fixed" open={open}>
@@ -94,7 +101,7 @@ const Appbar: React.FC<{ handleDrawerOpen: () => void, open: boolean }> = ({ han
           </MenuItem>
           <MenuItem onClick={() => {
             handleClose();
-            history.push('/login');
+            logout();
           }}
           >
             Выйти

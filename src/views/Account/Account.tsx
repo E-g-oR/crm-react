@@ -1,45 +1,48 @@
-import React from "react";
-import { Chip, Divider, Paper, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react"
+import { Chip, CircularProgress, Divider, Paper, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import CustomTable, { ITableHead, ITableRow } from "../components/UI/Table";
 import './account.css'
 import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
+import { Store } from "../../utils/store";
+import LoadingCircul from "../components/UI/LoadingCircul/LoadingCircul";
 
 const tableHead: ITableHead = ['Валюта', 'Курс', 'Дата'];
-const tableRows: ITableRow = [
-	{ name: 'USD', rate: 2.4428, margin: "MORE", date: '12.12.2021' },
-	{ name: 'EUR', rate: 2.8012, margin: "LESS", date: '12.12.2021' },
-	{ name: 'RUB', rate: 3.4332, margin: "LESS", date: '12.12.2021' },
-	{ name: 'GBP', rate: 3.2718, margin: "LESS", date: '12.12.2021' },
-];
 
-const TableRowsComponent: React.FC<{ data: ITableRow }> = ({ data}) => {
+
+const TableRowsComponent: React.FC<{ data: ITableRow | null }> = ({ data }) => {
 	return (
-		<>
-			<TableBody>
-			{data.length && data.map(item => (
-				<TableRow key={item.name + item.rate}>
-					<TableCell>{item.name}</TableCell>
+		<TableBody>
+			{data ?
+				data.map(item => (
+					<TableRow key={item.name + item.rate}>
+						<TableCell>{item.name}</TableCell>
 
-					<TableCell>
-						<Chip
-							label={`${item.rate}`}
-							color={item.margin === "MORE" ? "success" : "error"}
-							variant="outlined"
-							icon={item.margin === "MORE" ? <ArrowDropUp /> : <ArrowDropDown />}
-						/>
-					</TableCell>
+						<TableCell>
+							<Chip
+								label={`${item.rate}`}
+								color={item.margin === "MORE" ? "success" : "error"}
+								variant="outlined"
+								icon={item.margin === "MORE" ? <ArrowDropUp /> : <ArrowDropDown />}
+							/>
+						</TableCell>
 
-					<TableCell>{item.date}</TableCell>
+						<TableCell>{item.date}</TableCell>
+					</TableRow>
+				)) :
+				<TableRow >
+					<LoadingCircul />
 				</TableRow>
-			))}
-			</TableBody>
-		</>
+			}
+		</TableBody>
 	)
 }
 
 
-const Account = () => {
+const Account: React.FC<{ store: Store }> = observer(({ store }) => {
+	const ratesStore = store.ratesStore;
+	const TableRowsData = ratesStore.rates;
 	return (
 		<>
 			<Typography component="h1" variant="h4">Счет</Typography>
@@ -84,7 +87,7 @@ const Account = () => {
 						<Typography variant='h5'>Курсы валют</Typography>
 						<Divider />
 						<Paper variant="outlined" >
-							<CustomTable TableRowsComponent={TableRowsComponent} tableRows={tableRows} tableHead={tableHead} />
+							<CustomTable TableRowsComponent={TableRowsComponent} tableRows={TableRowsData} tableHead={tableHead} />
 						</Paper>
 					</Box>
 				</Paper>
@@ -92,5 +95,5 @@ const Account = () => {
 			</Stack>
 		</>
 	)
-}
+})
 export default Account

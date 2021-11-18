@@ -3,32 +3,42 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
 	Button,
 	DialogActions,
-	DialogContent, 
-	DialogTitle, 
-	FormControl, 
-	IconButton, 
-	Input, 
-	InputAdornment, 
-	InputLabel, 
-	Stack, 
-	TextField, 
+	DialogContent,
+	DialogTitle,
+	FormControl,
+	IconButton,
+	Input,
+	InputAdornment,
+	InputLabel,
+	Stack,
+	TextField,
 	Typography
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useHistory } from "react-router";
 
+interface IRegisterFormState {
+	name: string,
+	email: string,
+	password: string,
+	repeatPassword: string,
+	showPassword: boolean,
+	agreeWithTerms: boolean
+}
+
 const RegisterForm = () => {
 	const history = useHistory()
 
 	const [values, setValues] = React.useState({
-		amount: '',
+		name: '',
+		email: '',
 		password: '',
-		weight: '',
-		weightRange: '',
+		repeatPassword: '',
 		showPassword: false,
+		agreeWithTerms: false,
 	});
 
-	const handleChange = (prop) => (event) => {
+	const handleChange = (prop: keyof IRegisterFormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValues({ ...values, [prop]: event.target.value });
 	};
 
@@ -39,29 +49,42 @@ const RegisterForm = () => {
 		});
 	};
 
-	const handleMouseDownPassword = (event) => {
+	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 	};
 
 	return (
-		<Box>
+		<Box >
 			<DialogTitle>Register</DialogTitle>
-			<DialogContent>
-				<TextField
-					autoFocus
-					margin="dense"
-					id="name"
-					label="Email Address"
-					type="email"
-					fullWidth
-					variant="standard"
-				/>
-				<Stack >
+			<DialogContent sx={{ width: "100%", maxWidth: "450px" }}  >
+				<Stack direction="column" spacing={2} >
+					<TextField
+						autoFocus
+						margin="dense"
+						id="name"
+						label="Your name"
+						type="text"
+						name="name"
+						fullWidth
+						variant="standard"
+					/>
+					<TextField
+						autoFocus
+						margin="dense"
+						id="email"
+						label="Email Address"
+						type="email"
+						name="email"
+						fullWidth
+						variant="standard"
+					/>
+
 					<FormControl variant="standard" margin="normal" >
-						<InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+						<InputLabel htmlFor="password">Password</InputLabel>
 						<Input
-							id="standard-adornment-password"
+							id="password"
 							type={values.showPassword ? 'text' : 'password'}
+							name="password"
 							value={values.password}
 							onChange={handleChange('password')}
 							endAdornment={
@@ -78,10 +101,11 @@ const RegisterForm = () => {
 						/>
 					</FormControl>
 					<FormControl variant="standard" margin="normal" >
-						<InputLabel htmlFor="standard-adornment-password">Repeat password</InputLabel>
+						<InputLabel htmlFor="password-repeat">Repeat password</InputLabel>
 						<Input
-							id="standard-adornment-password"
+							id="password-repeat"
 							type={values.showPassword ? 'text' : 'password'}
+							name="password-repeat"
 							value={values.password}
 							onChange={handleChange('password')}
 							endAdornment={

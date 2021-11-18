@@ -15,6 +15,7 @@ import History from "../../views/History/History";
 import Planning from "../../views/Planning/Planning";
 import NewRecord from "../../views/NewRecord/NewRecord";
 import Categories from "../../views/Categories/Categories";
+import store from "../../utils/store";
 
 export const drawerWidth = 240;
 
@@ -75,21 +76,15 @@ const MainLayout = () => {
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           <Switch>
-            <Route path="/" exact component={Account} />
+            <Route path="/" exact >
+              <Account store={store} />
+            </Route>
             <Route path="/history" component={History} />
             <Route path="/planning" component={Planning} />
             <Route path="/new-record" component={NewRecord} />
             <Route path="/categories" component={Categories} />
-            {/* <Route path="/profile" component={} /> */}
           </Switch>
         </Box>
-        {/* <Main open={open}> */}
-
-
-
-
-
-        {/* </Main> */}
       </Box>
     </>
   )

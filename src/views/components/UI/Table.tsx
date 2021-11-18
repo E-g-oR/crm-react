@@ -37,8 +37,8 @@ const TableHeadCustom: React.FC<{ data: ITableHead }> = ({ data }) => {
 
 interface ITable {
   tableHead: ITableHead,
-  tableRows: ITableRow,
-  TableRowsComponent: React.FC<{ data: any[]}>
+  tableRows: any[] | null,
+  TableRowsComponent: React.FC<{ data: any[] | null}>
 }
 
 const CustomTable: React.FC<ITable> = ({
