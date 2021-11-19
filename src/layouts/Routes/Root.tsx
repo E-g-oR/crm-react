@@ -21,17 +21,17 @@ const Root: React.FC<{ store: Store }> = observer(({ store }) => {
   const history = useHistory();
   const auth = getAuth();
 
-  // const authStore = store.authStore;
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     authStore.setUser(user)
-  //     if (user) {
-  //       history.push('/');
-  //     } else {
-  //       history.push('/login');
-  //     }
-  //   })
-  // }, [])
+  const authStore = store.authStore;
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      authStore.setUser(user)
+      if (user) {
+        history.push('/');
+      } else {
+        history.push('/login');
+      }
+    })
+  }, [])
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = React.useMemo(

@@ -23,6 +23,11 @@ const Planning = () => {
 			title: "Подарки",
 			value: 50980,
 			limit: 60000
+		},
+		{
+			title: "Книги",
+			value: 6980,
+			limit: 6000
 		}
 	]
 

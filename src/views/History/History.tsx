@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import CustomTable, { ITableHead } from "../components/UI/Table";
 import { OpenInNewOutlined } from "@mui/icons-material";
 
-interface ITableHistoryRowItem {
+export interface ITableHistoryRowItem {
 	id: number,
 	amount: number,
 	currency: string,

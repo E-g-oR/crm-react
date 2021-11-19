@@ -75,7 +75,7 @@ const MainLayout = () => {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Route path="/"  >
+          <Route path="/" exact  >
             <Account store={store} />
           </Route>
           <Route path="/history" component={History} />
