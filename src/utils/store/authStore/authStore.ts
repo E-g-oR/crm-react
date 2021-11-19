@@ -21,7 +21,7 @@ export default class AuthStore {
         this.inProcess = true;
         signInWithEmailAndPassword(auth, email, password)
             .then(response => {
-                this.user = response.user;
+                this.setUser(response.user);
                 console.log(this.user); // TODO remove
 
             })
@@ -33,6 +33,10 @@ export default class AuthStore {
             .finally(() => {
                 this.inProcess = false;
             })
+    }
+
+    setUser(user: User | null) {
+        this.user = user;
     }
 
     logout(auth: Auth) {

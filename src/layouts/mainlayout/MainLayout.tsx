@@ -75,15 +75,13 @@ const MainLayout = () => {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Switch>
-            <Route path="/" exact >
-              <Account store={store} />
-            </Route>
-            <Route path="/history" component={History} />
-            <Route path="/planning" component={Planning} />
-            <Route path="/new-record" component={NewRecord} />
-            <Route path="/categories" component={Categories} />
-          </Switch>
+          <Route path="/"  >
+            <Account store={store} />
+          </Route>
+          <Route path="/history" component={History} />
+          <Route path="/planning" component={Planning} />
+          <Route path="/new-record" component={NewRecord} />
+          <Route path="/categories" component={Categories} />
         </Box>
       </Box>
     </>
