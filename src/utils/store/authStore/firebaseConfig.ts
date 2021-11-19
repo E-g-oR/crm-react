@@ -9,7 +9,8 @@ const firebaseConfig = {
   storageBucket: env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: env.REACT_APP_FIREBASE_APP_ID,
+  databaseURL: env.REACT_APP_FIREBASE_DATABASE_URL,
   measurementId: env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-}
+};
 
 export default firebaseConfig;

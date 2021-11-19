@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Switch,
-  Route,
   useHistory
 } from 'react-router-dom';
 import { observer } from 'mobx-react';

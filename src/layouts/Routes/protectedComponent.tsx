@@ -1,7 +1,4 @@
-import { getAuth, User } from '@firebase/auth';
-import React, { ReactElement, useEffect, useState } from 'react'
-import { useHistory } from 'react-router';
-import { onAuthStateChanged } from 'firebase/auth';
+import React from 'react'
 import { Store } from '../../utils/store';
 
 function protectedComponent(Component: React.FC, store: Store) {

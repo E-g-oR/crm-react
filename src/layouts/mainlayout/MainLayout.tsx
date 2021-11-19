@@ -56,7 +56,7 @@ const menu: IMenu = [
 ]
 
 const MainLayout = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const menuOpen = () => {
     setOpen(true);

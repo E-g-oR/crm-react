@@ -22,7 +22,6 @@ export default class AuthStore {
         signInWithEmailAndPassword(auth, email, password)
             .then(response => {
                 this.setUser(response.user);
-                console.log(this.user); // TODO remove
 
             })
             .catch(e => {
@@ -37,6 +36,9 @@ export default class AuthStore {
 
     setUser(user: User | null) {
         this.user = user;
+        if (user) {
+          this.authInfoStore.getInfo();
+        }
     }
 
     logout(auth: Auth) {
@@ -52,7 +54,6 @@ export default class AuthStore {
     }
 
     clearAfterLogout() {
-        console.log('clear authStore AfterLogout'); // TODO remove
         this.user = null;
         this.authInfoStore.clear()
     }
