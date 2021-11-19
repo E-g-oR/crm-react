@@ -49,6 +49,10 @@ export default class AuthStore {
             })
     }
 
+    register(auth: Auth) {
+        // TODO write user to database
+    }
+
     updateProfile() {
 
     }

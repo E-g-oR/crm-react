@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react"
 import {
 	Stack,
@@ -16,6 +16,10 @@ const Account: React.FC<{ store: Store }> = observer(({ store }) => {
 	const TableRowsData = ratesStore.rates;
 
 	const authStore = store.authStore;
+	useEffect(() => {
+		authStore.authInfoStore.getFormDB();
+
+	}, [])
 	return (
 		<>
 			<Typography component="h1" variant="h4">Счет</Typography>
