@@ -1,4 +1,4 @@
-import { Paper, Stack, Typography } from '@mui/material'
+import { Button, Paper, Stack, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { observer } from 'mobx-react'
 import React from 'react'
@@ -8,6 +8,15 @@ import LoadingCircul from '../components/UI/LoadingCircul/LoadingCircul'
 const HomeAccount: React.FC<{ store: Store }> = observer(({ store }) => {
   const authStore = store.authStore;
   const authInfoStore = authStore.authInfoStore;
+
+
+  const increase = () => {
+    if (authInfoStore.userAccountInfo) {
+      let bill = authInfoStore.userAccountInfo.bill
+      authInfoStore.updateBill(bill++);
+    }
+
+  }
 
   return (
     <Paper variant="outlined" sx={{ flex: 1.5 }} >
@@ -28,6 +37,7 @@ const HomeAccount: React.FC<{ store: Store }> = observer(({ store }) => {
             <LoadingCircul />
           }
         </div>
+        <Button variant="outlined" onClick={increase} >Increase account value</Button>
       </Stack>
 
 

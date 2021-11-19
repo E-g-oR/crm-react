@@ -35,10 +35,10 @@ export default class AuthStore {
     }
 
     setUser(user: User | null) {
-        this.user = user;
-        if (user) {
-          this.authInfoStore.getInfo();
-        }
+      this.user = user;
+      // if (user) {
+      //   this.authInfoStore.getInfo();  // TODO remove
+      // }
     }
 
     logout(auth: Auth) {

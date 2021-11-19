@@ -35,6 +35,18 @@ export default class AuthInfoStore {
   authStore;
   userAccountInfo: IUserAccount | null = null;
 
+  bill: number = 0;
+  savings: ISaving = {
+    currency: "USD",
+    value: 0,
+    list: [],
+  };
+  history: ITableHistoryRowItem[] = [];
+  planning: IPlanning = {
+    period: "month",
+    items: [],
+  };
+
   constructor(authStore: AuthStore) {
     makeAutoObservable(this);
     this.authStore = authStore;
@@ -58,7 +70,7 @@ export default class AuthInfoStore {
       this.putInfo(info);
     }, 5000);
   }
-  
+
   putInfo(info: IUserAccount | null) {
     this.userAccountInfo = info;
   }
@@ -108,8 +120,6 @@ export default class AuthInfoStore {
   }
 
   getFormDB() {
-    console.log("getDatabase");
-
     const db = getDatabase();
     const user = this.authStore.user;
     if (user) {
@@ -123,12 +133,22 @@ export default class AuthInfoStore {
         if (!data) {
           this.initialiseDBForUser(userId, name, email);
         } else {
+          this.putInfo(data);
         }
       });
     }
   }
 
-  updateBill(newBill: number) {}
+  updateBill(newBill: number) {
+    const user = this.authStore.user;
+    if (user) {
+      const userId = user.uid;
+
+      this.bill = newBill;
+      const database = getDatabase();
+      set(ref(database, `users/${userId}/userAccountInfo/bill`), newBill);
+    }
+  }
 
   addHistory(newHistory: ITableHistoryRowItem) {}
   updateHistory(history: ITableHistoryRowItem[]) {}
