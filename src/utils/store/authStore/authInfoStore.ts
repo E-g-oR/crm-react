@@ -1,5 +1,5 @@
 import { getAuth } from "@firebase/auth";
-import { getDatabase, onValue, ref, set } from "@firebase/database";
+import { getDatabase, onValue, push, ref, set } from "@firebase/database";
 import { makeAutoObservable } from "mobx";
 import { ITableHistoryRowItem } from "../../../views/History/History";
 import AuthStore from "./authStore";
@@ -31,9 +31,38 @@ interface IUserAccount {
   planning: IPlanning;
 }
 
+// =======================================
+export type IBase =
+  | "USD"
+  | "EUR"
+  | "BYN"
+  | "BTC"
+  | "RUB"
+  | "TRY"
+  | "GBP"
+  | "CHF";
+
+export type ICategoryUI = {
+  limit: number;
+  name: IBase;
+  period: string;
+  key: string;
+};
+
+type ICategory = {
+  limit: number;
+  name: IBase;
+  period: string;
+};
+
+type ICategories = {
+  [key: string]: ICategory;
+};
 export default class AuthInfoStore {
   authStore;
   userAccountInfo: IUserAccount | null = null;
+
+  base: IBase = "EUR";
 
   bill: number = 0;
   savings: ISaving = {
@@ -46,41 +75,57 @@ export default class AuthInfoStore {
     period: "month",
     items: [],
   };
+  categories: ICategories | null = null;
 
   constructor(authStore: AuthStore) {
     makeAutoObservable(this);
     this.authStore = authStore;
   }
 
-  getInfo() {
-    const info = {
-      bill: 34500,
-      savings: {
-        value: 340,
-        currency: "USD",
-        list: [],
-      },
-      history: [],
-      planning: {
-        period: "month",
-        items: [],
-      },
-    };
-    setTimeout(() => {
-      this.putInfo(info);
-    }, 5000);
+  putInfo = (info: IUserAccount | null) => (this.userAccountInfo = info);
+
+  getUID = () => this.authStore.user?.uid;
+
+  addCategory(name: string, limit: number, period: string = "month") {
+    limit = Number(limit);
+    const uid = this.getUID();
+
+    const database = getDatabase();
+    if (uid) {
+      const categoryListRef = ref(database, `users/${uid}/categories`);
+      const newCategory = push(categoryListRef);
+      set(newCategory, {
+        name,
+        limit,
+        period,
+      }).then(() => {
+        this.authStore.indexStore.messagesStore.setSucsess(
+          "Категория успешно добавлена!"
+        );
+        return true;
+      });
+    }
+    return false;
   }
 
-  putInfo(info: IUserAccount | null) {
-    this.userAccountInfo = info;
+  getCategories() {
+    const uid = this.getUID();
+    const database = getDatabase();
+    if (uid) {
+      const starCountRef = ref(database, `users/${uid}/categories`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        console.log(data);
+        this.categories = data;
+      });
+    }
   }
-
   initialiseDBForUser(
     userId: string,
     name: string | null,
     email: string | null
   ) {
-    const initInfoValue: IUserAccount = {
+    const initInfoValue = {
       bill: 0,
       history: [],
       planning: {
@@ -101,23 +146,11 @@ export default class AuthInfoStore {
     });
   }
 
-  saveToDB(userId: number) {
-    const initInfoValue: IUserAccount = {
-      bill: 0,
-      history: [],
-      planning: {
-        period: "month",
-        items: [],
-      },
-      savings: {
-        currency: "USD",
-        value: 0,
-        list: [],
-      },
-    };
+  saveToDB = (userId: number) => {
+    const data = this.userAccountInfo;
     const database = getDatabase();
-    set(ref(database, `users/${userId}/userAccountInfo`), initInfoValue);
-  }
+    set(ref(database, `users/${userId}/userAccountInfo`), data);
+  };
 
   getFormDB() {
     const db = getDatabase();
@@ -128,10 +161,13 @@ export default class AuthInfoStore {
       const name = user.displayName ? user.displayName : email;
 
       const userAccountInfoFromDB = ref(db, `users/${userId}/userAccountInfo`);
+
+      this.getCategories();
       onValue(userAccountInfoFromDB, (snapshot) => {
         const data = snapshot.val();
         if (!data) {
           this.initialiseDBForUser(userId, name, email);
+          this.getFormDB();
         } else {
           this.putInfo(data);
         }
@@ -157,7 +193,22 @@ export default class AuthInfoStore {
   updatePlanning(planning: IPlanning) {}
 
   addSavings(newSavings: ISavingItem) {}
-  updateSavings(savings: ISaving) {}
+
+  calcSavings(savingsArr: ISavingItem[]) {
+    // TODO чтобы посчитать сбережения, нужно получить rates
+    let amount = 0;
+
+    return amount;
+  }
+  updateSavings(savings: ISaving) {
+    // TODO нужно посчитать общие сбережения ^
+    // TODO отправить полностью новый объект сбережений
+    const updateLocal = () => {};
+    const updateonBackend = () => {};
+
+    updateLocal();
+    updateonBackend();
+  }
 
   ubdateAtDB() {}
 

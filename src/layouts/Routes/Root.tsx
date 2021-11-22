@@ -10,10 +10,11 @@ import {
   createTheme,
   useMediaQuery,
   ThemeProvider,
-  CssBaseline
+  CssBaseline,
 } from '@mui/material';
 import { Store } from '../../utils/store';
 import Routes from './Routes';
+import Messages from '../../utils/Message';
 
 
 const Root: React.FC<{ store: Store }> = observer(({ store }) => {
@@ -45,11 +46,13 @@ const Root: React.FC<{ store: Store }> = observer(({ store }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackbarProvider>
+      <SnackbarProvider maxSnack={3} >
         <CssBaseline />
+
         <Switch>
           <Routes />
         </Switch>
+        <Messages store={store} />
       </SnackbarProvider>
     </ThemeProvider>
   );

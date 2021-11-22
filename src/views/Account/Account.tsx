@@ -25,8 +25,8 @@ const Account: React.FC<{ store: Store }> = observer(({ store }) => {
 			<Typography component="h1" variant="h4">Счет</Typography>
 			<br />
 			<Stack
-				direction={{ xs: 'column', sm: 'column', md: 'row' }}
-				spacing={{ xs: 1, sm: 2, md: 4 }}
+				direction={{ xl: "row", lg: "row", md: "column", sm: "column", xs: "column" }}
+				spacing={{ xl: 3, lg: 3, md: 2, sm: 2, xs: 1 }}
 			>
 				<HomeAccount store={store} />
 

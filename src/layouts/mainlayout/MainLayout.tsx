@@ -9,7 +9,7 @@ import {
 import { Box } from "@mui/system";
 import Appbar from "./Appbar";
 import Menu, { DrawerHeader } from "./Menu";
-import { Switch, Route } from "react-router-dom";
+import {  Route } from "react-router-dom";
 import Account from "../../views/Account/Account";
 import History from "../../views/History/History";
 import Planning from "../../views/Planning/Planning";

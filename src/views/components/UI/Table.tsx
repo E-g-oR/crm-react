@@ -14,6 +14,7 @@ export type ITableHead = string[]
 
 export interface ITableRowItem {
   name: string,
+  rateOrigin: number,
   rate: number,
   margin: "MORE" | "LESS" | "SAME",
   date: string

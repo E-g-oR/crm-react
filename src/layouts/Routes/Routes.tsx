@@ -5,7 +5,6 @@ import UnauthenticatedLayout from '../LoginLayout';
 import LoginForm from '../LoginLayout/LoginForm';
 import RegisterForm from '../LoginLayout/RegisterForm';
 import MainLayout from '../mainlayout/MainLayout';
-import App from './../../App';
 import protectedComponent from './protectedComponent';
 
 function Routes() {

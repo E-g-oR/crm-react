@@ -12,8 +12,8 @@ const HomeAccount: React.FC<{ store: Store }> = observer(({ store }) => {
 
   const increase = () => {
     if (authInfoStore.userAccountInfo) {
-      let bill = authInfoStore.userAccountInfo.bill
-      authInfoStore.updateBill(bill++);
+      let bill = authInfoStore.userAccountInfo.bill + 5;
+      authInfoStore.updateBill(bill);
     }
 
   }
