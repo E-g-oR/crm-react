@@ -1,6 +1,6 @@
-import { getAuth } from "@firebase/auth";
-import { getDatabase, onValue, push, ref, set } from "@firebase/database";
 import { makeAutoObservable } from "mobx";
+
+import { getDatabase, onValue, push, ref, set } from "@firebase/database";
 import { ITableHistoryRowItem } from "../../../views/History/History";
 import AuthStore from "./authStore";
 

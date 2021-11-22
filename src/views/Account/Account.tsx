@@ -13,13 +13,13 @@ import './account.css'
 
 const Account: React.FC<{ store: Store }> = observer(({ store }) => {
 	const ratesStore = store.ratesStore;
-	const TableRowsData = ratesStore.rates;
 
 	const authStore = store.authStore;
 	useEffect(() => {
 		authStore.authInfoStore.getFormDB();
 
-	}, [])
+	}, []);
+	
 	return (
 		<>
 			<Typography component="h1" variant="h4">Счет</Typography>

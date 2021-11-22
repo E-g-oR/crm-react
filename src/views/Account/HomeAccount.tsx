@@ -1,9 +1,8 @@
-import { Button, Paper, Stack, Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import { observer } from 'mobx-react'
-import React from 'react'
-import { Store } from '../../utils/store'
-import LoadingCircul from '../components/UI/LoadingCircul/LoadingCircul'
+import { Button, Paper, Stack, Typography } from '@mui/material';
+import { observer } from 'mobx-react';
+import React from 'react';
+import { Store } from '../../utils/store';
+import LoadingCircul from '../components/UI/LoadingCircul/LoadingCircul';
 
 const HomeAccount: React.FC<{ store: Store }> = observer(({ store }) => {
   const authStore = store.authStore;
